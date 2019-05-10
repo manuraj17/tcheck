@@ -10,3 +10,6 @@ supported as of now.
 
 This is a pre-beta version in experimental phase, so please be aware that there
 could be breakages.
+
+You can download it from
+[here](https://chrome.google.com/webstore/detail/rails-translation-checker/capeijmiiafcibpfbmabkacobmjfedhi)
