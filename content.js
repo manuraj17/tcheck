@@ -3,13 +3,22 @@ const ERROR_CLASS = 'translation_missing';
 let elements = document.getElementsByClassName(ERROR_CLASS);
 
 if(elements.length) {
-  let errors = Array.prototype.map.call(
-    elements,
-    element => ({
-      key: element.title.split(":")[1],
-      text: element.innerHTML
-    })
-  )
+  let errors = [];
+  let parsedErrors = new Map();
+
+  Array.prototype.map.call(elements, (error) => {
+    if(parsedErrors.get(error.innerHTML) == undefined){
+      // Error not yet parsed
+      errors.push(
+        {
+          text: error.innerHTML,
+          key: error.title.split(":")[1]
+        }
+      )
+
+      parsedErrors.set(error.innerHTML, true)
+    }
+  })
 
   sendErrors(errors);
 } else {
