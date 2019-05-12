@@ -16,7 +16,7 @@ if(elements.length) {
         }
       )
 
-      parsedErrors.set(error.innerHTML, true)
+      parsedErrors.set(error.innerHTML, true);
     }
   })
 
@@ -32,3 +32,18 @@ function sendErrors(errors) {
     "errors": errors
   });
 }
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if(request.message == "highlight") {
+      let elements = document.getElementsByClassName(ERROR_CLASS);
+
+      let element = Array.prototype.forEach.call(elements, (element) => {
+        if(element.innerHTML == request.data){
+          element.style.border = '1px solid red';
+        }
+      });
+    }
+    sendResponse({data: request.data, success: true});
+  }
+);
